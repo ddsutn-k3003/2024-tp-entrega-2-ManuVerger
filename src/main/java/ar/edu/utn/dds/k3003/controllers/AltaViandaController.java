@@ -19,7 +19,7 @@ public class AltaViandaController implements Handler {
     public void handle(Context ctx) throws Exception {
         Vianda vianda = ctx.bodyAsClass(Vianda.class);
         this.repo.save(vianda);
-        ctx.status(HttpStatus.CREATED);
+        ctx.status(HttpStatus.OK);  //ok devuelve codigo 200 created el 201
         ctx.result("Vianda agregada correctamente");
     }
 
