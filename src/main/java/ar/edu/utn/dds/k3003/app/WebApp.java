@@ -12,10 +12,10 @@ public class WebApp {
         Integer port = Integer.parseInt(
                 System.getProperty("port", "8080"));
         Javalin app = Javalin.create().start(port);
-        app.get("/", ctx -> ctx.result("Hola Mundo"));
+        app.get("/", ctx -> ctx.result("Servicio de Viandas!!!"));
         app.post("/viandas", new AltaViandaController(repo)); //Postea una vianda
         app.get("/viandas", new ListaViandaController(repo)); //devuelve todas las viandas (no hace falta esta api pero dejo para hacer pruebas)
-        app.get("/viandas/{qr}", new ListaViandaQRController(repo));
+        app.get("/viandas/{qr}", new ListaViandaQRController(repo)); //devuelve vianda x qr y mensaje 404 si no encuentra
     }
 }
 
