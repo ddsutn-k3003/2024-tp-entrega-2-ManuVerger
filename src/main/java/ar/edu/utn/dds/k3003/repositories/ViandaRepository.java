@@ -9,7 +9,9 @@ public class ViandaRepository {
     private static AtomicLong seqId = new AtomicLong();
     private Collection<Vianda> viandas;
 
-    public ViandaRepository() { this.viandas = new ArrayList<>(); }
+    public ViandaRepository() {
+        this.viandas = new ArrayList<>();
+    }
 
     public Vianda save(Vianda vianda) {
         if (Objects.isNull(vianda.getId())) {
@@ -40,6 +42,21 @@ public class ViandaRepository {
         return first.orElseThrow(() -> new NoSuchElementException(
                 String.format("No hay una vianda de id: %s", id)
         ));
+    }
+
+    public void update(Vianda vianda) {
+        String qr = vianda.getQr();
+        Optional<Vianda> viandaOptional = this.viandas.stream().filter(x -> x.getQr().equals(qr)).findFirst();
+        if (viandaOptional.isPresent()) {
+            Vianda existingVianda = viandaOptional.get();
+            // Actualizar los campos que sean necesarios
+            existingVianda.setColaboradorId(vianda.getColaboradorId());
+            existingVianda.setHeladeraId(vianda.getHeladeraId());
+            existingVianda.setEstado(vianda.getEstado());
+            existingVianda.setFechaElaboracion(vianda.getFechaElaboracion());
+        } else {
+            throw new NoSuchElementException("No se encontró la vianda a actualizar");
+        }
     }
 
 }
