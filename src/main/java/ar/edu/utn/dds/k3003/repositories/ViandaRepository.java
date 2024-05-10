@@ -21,13 +21,6 @@ public class ViandaRepository {
         return vianda;
     }
 
-//    public Vianda findByQR(String qr) {
-//        Optional<Vianda> first = this.viandas.stream().filter(x -> x.getQr().equals(qr)).findFirst();
-//        return first.orElseThrow(() -> new NoSuchElementException(
-//                String.format("No hay una vianda asociada al qr: %s", qr)
-//        ));
-//    }
-
     public Vianda findByQR(String qr) {
         Optional<Vianda> viandaOptional = this.viandas.stream().filter(x -> x.getQr().equals(qr)).findFirst();
         return viandaOptional.orElse(null); // Devuelve null si no se encuentra la vianda
