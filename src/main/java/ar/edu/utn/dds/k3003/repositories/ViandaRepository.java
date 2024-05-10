@@ -49,7 +49,6 @@ public class ViandaRepository {
         Optional<Vianda> viandaOptional = this.viandas.stream().filter(x -> x.getQr().equals(qr)).findFirst();
         if (viandaOptional.isPresent()) {
             Vianda existingVianda = viandaOptional.get();
-            // Actualizar los campos que sean necesarios
             existingVianda.setColaboradorId(vianda.getColaboradorId());
             existingVianda.setHeladeraId(vianda.getHeladeraId());
             existingVianda.setEstado(vianda.getEstado());
