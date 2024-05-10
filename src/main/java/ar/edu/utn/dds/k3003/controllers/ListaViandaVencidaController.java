@@ -5,7 +5,7 @@ import ar.edu.utn.dds.k3003.model.Vianda;
 import ar.edu.utn.dds.k3003.repositories.ViandaRepository;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-
+import org.json.JSONObject;
 public class ListaViandaVencidaController implements Handler {
     private ViandaRepository repo;
 
@@ -13,17 +13,37 @@ public class ListaViandaVencidaController implements Handler {
         this.repo = repo;
     }
 
+//    @Override
+//    public void handle(Context ctx) throws Exception {
+//        String qr = ctx.pathParam("qr");
+//        Vianda vianda = repo.findByQR(qr);
+//
+//        if (vianda == null) {
+//            ctx.status(404).result("Vianda no encontrada");
+//        } else if (vianda.getEstado().equals(EstadoViandaEnum.VENCIDA)) {
+//            ctx.result("true, la vianda esta en estado VENCIDA");
+//        } else {
+//            ctx.result("false, la vianda no esta vencida");
+//        }
+//    }
+//} Devuelve en texto
+
     @Override
     public void handle(Context ctx) throws Exception {
-        String qr = ctx.pathParam("qr");  // Obtener el código QR del contexto
-        Vianda vianda = repo.findByQR(qr);  // Buscar la vianda por QR en el repositorio
+        String qr = ctx.pathParam("qr");
+        Vianda vianda = repo.findByQR(qr);
+
+        JSONObject resultado = new JSONObject();  //objeto JSON para el resultado
 
         if (vianda == null) {
-            ctx.status(404).result("Vianda no encontrada");  // Devolver 404 si la vianda no se encuentra
-        } else if (vianda.getEstado().equals(EstadoViandaEnum.VENCIDA)) {
-            ctx.result("true, la vianda esta en estado VENCIDA");  // Devolver true si la vianda está vencida
+            resultado.put("resultado", false);
+            ctx.status(404);
         } else {
-            ctx.result("false, la vianda no esta vencida");  // Devolver false si la vianda no esta vencida
+            boolean viandaVencida = vianda.getEstado().equals(EstadoViandaEnum.VENCIDA);
+            resultado.put("resultado", viandaVencida);  //agregar resultado al objeto JSON
         }
+
+        ctx.result(resultado.toString()).contentType("application/json"); //la unica forma que devolvio el json bien ctx.json(resultado); devolvia siempre mal
     }
+
 }
