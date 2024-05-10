@@ -18,10 +18,12 @@ public class ListaViandaVencidaController implements Handler {
         String qr = ctx.pathParam("qr");  // Obtener el código QR del contexto
         Vianda vianda = repo.findByQR(qr);  // Buscar la vianda por QR en el repositorio
 
-        if (vianda != null && vianda.getEstado().equals(EstadoViandaEnum.VENCIDA)) {
+        if (vianda == null) {
+            ctx.status(404).result("Vianda no encontrada");  // Devolver 404 si la vianda no se encuentra
+        } else if (vianda.getEstado().equals(EstadoViandaEnum.VENCIDA)) {
             ctx.result("true, la vianda esta en estado VENCIDA");  // Devolver true si la vianda está vencida
         } else {
-            ctx.result("false, la vianda no existe o no esta vencida");  // Devolver false si no se encuentra la vianda o no está vencida
+            ctx.result("false, la vianda no esta vencida");  // Devolver false si la vianda no esta vencida
         }
     }
 }
