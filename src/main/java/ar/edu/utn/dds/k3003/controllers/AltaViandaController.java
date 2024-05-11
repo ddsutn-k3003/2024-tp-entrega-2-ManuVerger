@@ -1,26 +1,24 @@
 package ar.edu.utn.dds.k3003.controllers;
 
-import ar.edu.utn.dds.k3003.model.Vianda;
-import ar.edu.utn.dds.k3003.repositories.ViandaRepository;
+import ar.edu.utn.dds.k3003.app.Fachada;
+import ar.edu.utn.dds.k3003.facades.dtos.ViandaDTO;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 
 public class AltaViandaController implements Handler {
 
-    private ViandaRepository repo;
+    private final Fachada fachada;
 
-    public AltaViandaController(ViandaRepository repo) {
-        super();
-        this.repo = repo;
+    public AltaViandaController(Fachada fachada) {
+        this.fachada = fachada;
     }
 
     @Override
     public void handle(Context ctx) throws Exception {
-        Vianda vianda = ctx.bodyAsClass(Vianda.class);
-        this.repo.save(vianda);
+        ViandaDTO viandaDTO = ctx.bodyAsClass(ViandaDTO.class);
+        ViandaDTO viandaAgregada = fachada.agregar(viandaDTO);
         ctx.status(HttpStatus.OK);
-        ctx.result("Vianda agregada correctamente");
+        ctx.json(viandaAgregada);
     }
-
 }
