@@ -47,7 +47,6 @@
       <artifactId>dds-eval-tp2024</artifactId>
       <version>0.0.18</version>
     </dependency>
-
     <dependency>
       <groupId>io.javalin</groupId>
       <artifactId>javalin</artifactId>
@@ -72,6 +71,16 @@
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20231013</version>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.retrofit2</groupId>
+      <artifactId>retrofit</artifactId>
+      <version>2.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.retrofit2</groupId>
+      <artifactId>converter-jackson</artifactId>
+      <version>2.11.0</version>
     </dependency>
 
 
