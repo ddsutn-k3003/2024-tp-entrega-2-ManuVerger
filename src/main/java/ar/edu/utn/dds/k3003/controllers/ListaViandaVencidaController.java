@@ -1,49 +1,33 @@
 package ar.edu.utn.dds.k3003.controllers;
 
+import ar.edu.utn.dds.k3003.app.Fachada;
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoViandaEnum;
-import ar.edu.utn.dds.k3003.model.Vianda;
-import ar.edu.utn.dds.k3003.repositories.ViandaRepository;
+import ar.edu.utn.dds.k3003.facades.dtos.ViandaDTO;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.json.JSONObject;
+
 public class ListaViandaVencidaController implements Handler {
-    private ViandaRepository repo;
+    private Fachada fachada;
 
-    public ListaViandaVencidaController(ViandaRepository repo) {
-        this.repo = repo;
+    public ListaViandaVencidaController(Fachada fachada) {
+        this.fachada = fachada;
     }
-
-//    @Override
-//    public void handle(Context ctx) throws Exception {
-//        String qr = ctx.pathParam("qr");
-//        Vianda vianda = repo.findByQR(qr);
-//
-//        if (vianda == null) {
-//            ctx.status(404).result("Vianda no encontrada");
-//        } else if (vianda.getEstado().equals(EstadoViandaEnum.VENCIDA)) {
-//            ctx.result("true, la vianda esta en estado VENCIDA");
-//        } else {
-//            ctx.result("false, la vianda no esta vencida");
-//        }
-//    }
-//} Devuelve en texto
 
     @Override
     public void handle(Context ctx) throws Exception {
         String qr = ctx.pathParam("qr");
-        Vianda vianda = repo.findByQR(qr);
 
-        JSONObject resultado = new JSONObject();  //objeto JSON para el resultado
+        JSONObject resultado = new JSONObject();  // Objeto JSON para el resultado
 
-        if (vianda == null) {
-            resultado.put("resultado", false);
-            ctx.status(404);
-        } else {
+        try {
+            ViandaDTO vianda = fachada.buscarXQR(qr);
             boolean viandaVencida = vianda.getEstado().equals(EstadoViandaEnum.VENCIDA);
-            resultado.put("resultado", viandaVencida);  //agregar resultado al objeto JSON
+            resultado.put("resultado", viandaVencida);  // Agregar resultado al objeto JSON
+            ctx.result(resultado.toString()).contentType("application/json");
+        } catch (IllegalArgumentException e) {
+            resultado.put("resultado", false);  // Si no se encuentra la vianda, devuelve falso
+            ctx.status(404);
         }
-
-        ctx.result(resultado.toString()).contentType("application/json"); //la unica forma que devolvio el json bien ctx.json(resultado); devolvia siempre mal
     }
-
 }
