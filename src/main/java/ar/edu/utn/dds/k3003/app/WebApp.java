@@ -13,5 +13,21 @@ public class WebApp {
         app.get("/viandas/{qr}", new ListaViandaQRController(fachada)); // Devuelve vianda por QR y mensaje 404 si no encuentra
         // app.get("/viandas/{qr}/vencida", new ListaViandaVencidaController(fachada)); // Devuelve true si la vianda está vencida, false si no se encuentra o no está vencida
         app.patch("/viandas/{qr}", new ModificarHeladeraController(fachada)); // Modifica UNICAMENTE la heladeraId de una vianda por QR mediante un PATCH
+        app.get("/viandas/search/findByColaboradorIdAndAnioAndMes", new ViandasColaboradorController(fachada)); // Devuelve las viandas de un colaborador para un mes y año especificados
     }
 }
+
+//para probar en postman
+//      {
+//        "id": null,
+//        "codigoQR": "hhh",
+//        "colaboradorId": 10,
+//        "heladeraId": 1,
+//        "estado": "PREPARADA",
+//        "fechaElaboracion": "2024-05-09T10:30:00Z"
+//        }
+//POST http://localhost:8080/viandas/
+//GET http://localhost:8080/viandas/hhh
+//viandas vencidas
+//PATCH http://localhost:8080/viandas/hhh body raw json { "heladeraId": 10 }
+//GET http://localhost:8080/viandas/search/findByColaboradorIdAndAnioAndMes?colaboradorId=10&anio=2024&mes=5
