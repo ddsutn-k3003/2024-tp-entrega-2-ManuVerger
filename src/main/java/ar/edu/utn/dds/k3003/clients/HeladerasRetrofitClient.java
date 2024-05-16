@@ -7,7 +7,10 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
-public interface TemperaturaRetrofitClient {
-    @GET("/temperaturas/{heladeraId}")
-    Call<List<TemperaturaDTO>> obtenerTemperaturasPorHeladeraId(@Path("heladeraId") int heladeraId);
+public interface HeladerasRetrofitClient {
+    @GET("heladeras/{idHeladera}/temperaturas")
+    Call<List<TemperaturaDTO>> obtenerTemperaturas(@Path("idHeladera") Integer idHeladera);
 }
+
+
+
