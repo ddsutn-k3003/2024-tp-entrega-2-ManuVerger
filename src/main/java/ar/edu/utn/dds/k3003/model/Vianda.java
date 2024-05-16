@@ -15,18 +15,20 @@ import java.time.LocalDateTime;
 
 public class Vianda {
     private Long id;
-    private String qr;
+    private String codigoQR;
+    private LocalDateTime fechaElaboracion;
+    private EstadoViandaEnum estado;
     private Long colaboradorId;
     private Integer heladeraId;
-    private EstadoViandaEnum estado;
-    private LocalDateTime fechaElaboracion;
 
-    public Vianda(String qr, Long colaboradorId, Integer heladeraId, EstadoViandaEnum estado, LocalDateTime fechaElaboracion) {
-        this.qr = qr;
+    public Vianda(String codigoQR, LocalDateTime fechaElaboracion, EstadoViandaEnum estado, Long colaboradorId, Integer heladeraId) {
+        this.codigoQR = codigoQR;
+        this.fechaElaboracion = fechaElaboracion;
+        this.estado = estado;
         this.colaboradorId = colaboradorId;
         this.heladeraId = heladeraId;
-        this.estado = estado;
-        this.fechaElaboracion = fechaElaboracion;
+
+
     }
 
 }

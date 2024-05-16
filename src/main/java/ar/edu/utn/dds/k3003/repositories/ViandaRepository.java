@@ -22,7 +22,7 @@ public class ViandaRepository {
     }
 
     public Vianda findByQR(String qr) {
-        Optional<Vianda> viandaOptional = this.viandas.stream().filter(x -> x.getQr().equals(qr)).findFirst();
+        Optional<Vianda> viandaOptional = this.viandas.stream().filter(x -> x.getCodigoQR().equals(qr)).findFirst();
         return viandaOptional.orElse(null); // Devuelve null si no se encuentra la vianda
     }
 
@@ -38,8 +38,8 @@ public class ViandaRepository {
     }
 
     public void update(Vianda vianda) {
-        String qr = vianda.getQr();
-        Optional<Vianda> viandaOptional = this.viandas.stream().filter(x -> x.getQr().equals(qr)).findFirst();
+        String qr = vianda.getCodigoQR();
+        Optional<Vianda> viandaOptional = this.viandas.stream().filter(x -> x.getCodigoQR().equals(qr)).findFirst();
         if (viandaOptional.isPresent()) {
             Vianda existingVianda = viandaOptional.get();
             existingVianda.setColaboradorId(vianda.getColaboradorId());

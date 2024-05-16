@@ -23,7 +23,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaViandas {
 
     @Override
     public ViandaDTO agregar(ViandaDTO viandaDTO) {
-        Vianda vianda = new Vianda(viandaDTO.getCodigoQR(), viandaDTO.getColaboradorId(), viandaDTO.getHeladeraId(), viandaDTO.getEstado(), viandaDTO.getFechaElaboracion());
+        Vianda vianda = new Vianda(viandaDTO.getCodigoQR(), viandaDTO.getFechaElaboracion(), viandaDTO.getEstado(), viandaDTO.getColaboradorId(), viandaDTO.getHeladeraId());
         vianda = this.viandaRepository.save(vianda);
         return viandaMapper.map(vianda);
     }

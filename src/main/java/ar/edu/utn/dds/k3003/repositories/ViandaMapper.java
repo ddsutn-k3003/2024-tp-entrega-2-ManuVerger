@@ -6,7 +6,7 @@ import ar.edu.utn.dds.k3003.model.Vianda;
 public class ViandaMapper {
 
     public ViandaDTO map(Vianda vianda) {
-        ViandaDTO viandaDTO = new ViandaDTO(vianda.getQr(),
+        ViandaDTO viandaDTO = new ViandaDTO(vianda.getCodigoQR(),
                 vianda.getFechaElaboracion(),
                 vianda.getEstado(),
                 vianda.getColaboradorId(),

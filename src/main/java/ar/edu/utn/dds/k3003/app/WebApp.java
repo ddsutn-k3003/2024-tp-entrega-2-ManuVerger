@@ -19,14 +19,14 @@ public class WebApp {
 
 
 //para probar en postman
-//      {
-//        "id": null,
-//        "codigoQR": "hhh",
-//        "colaboradorId": 10,
-//        "heladeraId": 1,
-//        "estado": "PREPARADA",
-//        "fechaElaboracion": "2024-05-09T10:30:00Z"
-//        }
+//    {
+//            "id": 0,
+//            "codigoQR": "codigoQR",
+//            "fechaElaboracion": "2024-05-09T10:30:00Z",
+//            "estado": "PREPARADA",
+//            "colaboradorId": 10,
+//            "heladeraId": 10
+//            }
 //POST http://localhost:8080/viandas/
 //GET http://localhost:8080/viandas/hhh
 //viandas vencidas
