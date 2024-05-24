@@ -59,14 +59,13 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaViandas {
         return viandasDeColaborador;
     }
 
-
     @Override
     public ViandaDTO buscarXQR(String qr) {
         Vianda vianda = viandaRepository.findByQR(qr);
         if (vianda != null) {
             return viandaMapper.map(vianda);
         } else {
-            throw new IllegalArgumentException("No se encontró la vianda con el código QR proporcionado.");
+            return null;
         }
     }
 
@@ -79,7 +78,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaViandas {
     public boolean evaluarVencimiento(String qr) throws NoSuchElementException {
         ViandaDTO vianda = buscarXQR(qr);
         if (vianda == null) {
-            throw new NoSuchElementException("No se encontró la vianda con el código QR: " + qr);
+            throw new NoSuchElementException("No se encontró la vianda con el codigoo QR: " + qr);
         }
         List<TemperaturaDTO> temperaturas = heladerasProxy.obtenerTemperaturas(vianda.getHeladeraId());
 

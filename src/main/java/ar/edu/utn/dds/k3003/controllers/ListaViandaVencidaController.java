@@ -14,6 +14,7 @@ public class ListaViandaVencidaController implements Handler {
         this.fachada = fachada;
     }
 
+
     @Override
     public void handle(Context ctx) throws Exception {
         String qr = ctx.pathParam("qr");
@@ -22,11 +23,11 @@ public class ListaViandaVencidaController implements Handler {
 
         try {
             boolean viandaVencida = fachada.evaluarVencimiento(qr);
-            resultado.put("resultado", viandaVencida);  // Agregar resultado al objeto JSON
+            resultado.put("resultado", viandaVencida);
             ctx.result(resultado.toString()).contentType("application/json");
         } catch (NoSuchElementException e) {
-            resultado.put("resultado", false);  // Si no se encuentra la vianda, devuelve falso
-            ctx.status(404);
+            resultado.put("error", "No se encontró la vianda con el código QR: " + qr);
+            ctx.status(404).result(resultado.toString());
         }
     }
 }

@@ -18,7 +18,6 @@ public class ListaViandaQRController implements Handler {
         String qr = ctx.pathParam("qr");
 
         try {
-            // uso try para que no rompa con la exception de fachada buscarxqr
             ViandaDTO vianda = fachada.buscarXQR(qr);
             ctx.json(vianda);
 
