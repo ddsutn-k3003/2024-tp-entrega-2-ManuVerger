@@ -31,7 +31,7 @@ public class ViandasColaboradorController implements Handler {
 //            ctx.status(404).result("No se encontraron viandas para el colaborador y fecha especificados.");
 //        }
 //    }
-//}         Este tiraba error en el test creo que por que devolvia una lista de objetos en vez de un solo objeto vianda
+//}         Este tiraba error en el test creo que por que devolvia una lista de objetos en vez de un solo objeto viandas
 
     @Override
     public void handle(Context ctx) throws Exception {
